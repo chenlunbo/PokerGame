@@ -47,6 +47,20 @@ class Test(unittest.TestCase):
         bs.addRecord(2, 3)
         self.assertEqual(bs.getScore(), 62)
 
+    def test_normal_and_strike_should_as_expected(self):
+        bs = BowlingScorer()
+        bs.addRecord(1, 2)
+        bs.addRecord(3, 4)
+        bs.addRecord(5, 1)
+        bs.addRecord(2, 3)
+        bs.addRecord(4, 5)
+        bs.addRecord(1, 2)
+        bs.addRecord(3, 4)
+        bs.addRecord('X')
+        bs.addRecord(2, 3)
+        bs.addRecord(4, 5)
+        self.assertEqual(bs.getScore(), 62)
+
 
 if __name__ == '__main__':
  +    unittest.main(verbosity=2)
