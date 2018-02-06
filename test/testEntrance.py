@@ -33,6 +33,19 @@ class Test(unittest.TestCase):
         bs.addRecord(9, "-")
         self.assertEqual(bs.getScore(), 90)
 
+    def test_normal_and_spare_should_as_expected(self):
+        bs = BowlingScorer()
+        bs.addRecord(1, 2)
+        bs.addRecord(3, 4)
+        bs.addRecord(5, 1)
+        bs.addRecord(2, 3)
+        bs.addRecord(4, 5)
+        bs.addRecord(1, "/")
+        bs.addRecord(1, 2)
+        bs.addRecord(3, 4)
+        bs.addRecord(5, 1)
+        bs.addRecord(2, 3)
+        self.assertEqual(bs.getScore(), 62)
 
 
 if __name__ == '__main__':
