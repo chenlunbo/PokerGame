@@ -10,8 +10,10 @@ class BowlingScorer:
         self.totalTimes = 0
 
     def addRecord(self, firstScore, secondScore):
-        if(secondScore == '-'):
+        if (secondScore == '-'):
             secondScore = 0
+        if (secondScore == '/'):
+            secondScore = 10
         self.totalScore += firstScore + secondScore
         self.totalTimes += 1
 
