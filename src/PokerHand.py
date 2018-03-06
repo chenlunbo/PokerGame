@@ -15,12 +15,16 @@ def get_category(card1, card2, card3, card4, card5):
     suit_count_list = list(suit_count.values())
     point_max_value = max(pint_count_list)
     suit_max_value = max(suit_count_list)
+    point_second_max_value = len(pint_count_list)
     # print(sorted(count.keys(), my_cmp))
     # print(sorted(count.keys(), key=lambda point: map_dict[point]))
     sorted_keys = sorted(point_count.keys(), key=lambda point: map_dict[point])
     print(sorted_keys)
     if suit_max_value == 5:
-        return 'Flush'
+        if is_straight(sorted_keys):
+            return 'Royal Flush'
+        else:
+            return 'Flush'
     if point_max_value == 1:
         if is_straight(sorted_keys):
             return 'Straight'
@@ -29,7 +33,10 @@ def get_category(card1, card2, card3, card4, card5):
     if point_max_value == 2:
         return 'Pair'
     if point_max_value == 3:
-        return 'Three of a kind'
+        if point_second_max_value == 2:
+            return 'Full House'
+        else:
+            return 'Three of a kind'
     if point_max_value == 4:
         return 'Four of a kind'
 

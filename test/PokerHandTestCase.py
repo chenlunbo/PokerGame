@@ -27,17 +27,17 @@ class TestCategory(unittest.TestCase):
         card = PokerCard("AS", "5S", "3S", "9S", "JS")
         self.assertEqual('Flush', card.category)
 
-    # def test_full_house_category(self):
-    #     card = PokerCard	("3S", "3D", "3H", "JS", "JC")
-    #     self.assertEqual('Four of a kind', card.category)
-    #
-    # def test_four_of_a_kind_category(self):
-    #     card = PokerCard("3S", "3D", "3H", "3C", "JC")
-    #     self.assertEqual('Straight', card.category)
-    #
-    # def test_royal_flush_category(self):
-    #     card = PokerCard("AS", "2S", "4S", "3S", "5S")
-    #     self.assertEqual('Straight', card.category)
+    def test_full_house_category(self):
+        card = PokerCard("3S", "3D", "3H", "JS", "JC")
+        self.assertEqual('Full House', card.category)
+
+    def test_four_of_a_kind_category(self):
+        card = PokerCard("3S", "3D", "3H", "3C", "JC")
+        self.assertEqual('Four of a kind', card.category)
+
+    def test_royal_flush_category(self):
+        card = PokerCard("AS", "2S", "4S", "3S", "5S")
+        self.assertEqual('Royal Flush', card.category)
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
