@@ -18,33 +18,31 @@ def get_category(card1, card2, card3, card4, card5):
         card4[0:len(card4) - 1],
         card5[0:len(card5) - 1]
     )
-    all_card_suits = (card1[1], card2[1], card3[1], card4[1], card5[1])
-    suit_max_value = max(list(Counter(all_card_suits).values()))
     point_count = Counter(all_card_points)
-    pint_count_list = list(point_count.values())
-    point_max_value = max(pint_count_list)
-    point_second_max_value = len(pint_count_list)
+    max_times_of_point = max(list(point_count.values()))
     sorted_keys = sorted(point_count.keys(), key=lambda point: map_dict[point])
-    print(all_card_points, all_card_suits, sorted_keys)
-    if suit_max_value == 5:
+    if is_all_card_in_same_suit(card1, card2, card3, card4, card5):
         if is_straight(sorted_keys):
             return 'Royal Flush'
-        else:
-            return 'Flush'
-    if point_max_value == 1:
+        return 'Flush'
+    if max_times_of_point == 1:
         if is_straight(sorted_keys):
             return 'Straight'
-        else:
-            return 'High card'
-    if point_max_value == 2:
+        return 'High card'
+    if max_times_of_point == 2:
         return 'Pair'
-    if point_max_value == 3:
-        if point_second_max_value == 2:
+    if max_times_of_point == 3:
+        if len(list(point_count.values())) == 2:
             return 'Full House'
-        else:
-            return 'Three of a kind'
-    if point_max_value == 4:
+        return 'Three of a kind'
+    if max_times_of_point == 4:
         return 'Four of a kind'
+
+
+def is_all_card_in_same_suit(card1, card2, card3, card4, card5):
+    all_card_suits = (card1[1], card2[1], card3[1], card4[1], card5[1])
+    suit_max_value = max(list(Counter(all_card_suits).values()))
+    return suit_max_value == 5
 
 
 class PokerCard:
