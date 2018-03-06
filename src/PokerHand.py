@@ -8,23 +8,36 @@ def is_straight(sorted_keys):
 
 def get_category(card1, card2, card3, card4, card5):
     all_card_points = card1[0] + card2[0] + card3[0] + card4[0] + card5[0]
-    count = Counter(all_card_points)
-    count_list = list(count.values())
-    max_value = max(count_list)
+    all_card_suits = card1[1] + card2[1] + card3[1] + card4[1] + card5[1]
+    point_count = Counter(all_card_points)
+    suit_count = Counter(all_card_suits)
+    pint_count_list = list(point_count.values())
+    suit_count_list = list(suit_count.values())
+    point_max_value = max(pint_count_list)
+    suit_max_value = max(suit_count_list)
+    point_second_max_value = len(pint_count_list)
     # print(sorted(count.keys(), my_cmp))
     # print(sorted(count.keys(), key=lambda point: map_dict[point]))
-    sorted_keys = sorted(count.keys(), key=lambda point: map_dict[point])
+    sorted_keys = sorted(point_count.keys(), key=lambda point: map_dict[point])
     print(sorted_keys)
-    if max_value == 1:
+    if suit_max_value == 5:
+        if is_straight(sorted_keys):
+            return 'Royal Flush'
+        else:
+            return 'Flush'
+    if point_max_value == 1:
         if is_straight(sorted_keys):
             return 'Straight'
         else:
             return 'High card'
-    if max_value == 2:
+    if point_max_value == 2:
         return 'Pair'
-    if max_value == 3:
-        return 'Three of a kind'
-    if max_value == 4:
+    if point_max_value == 3:
+        if point_second_max_value == 2:
+            return 'Full House'
+        else:
+            return 'Three of a kind'
+    if point_max_value == 4:
         return 'Four of a kind'
 
 
