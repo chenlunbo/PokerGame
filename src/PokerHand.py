@@ -78,16 +78,16 @@ def get_category(card1, card2, card3, card4, card5):
         return ROYAL_FLUSH
     if is_category_flush(point_count, suit_count):
         return FLUSH
-    if is_category_straight(point_count):
-        return STRAIGHT
     if is_category_high_card(point_count):
         return HIGH_CARD
     if is_category_pair(point_count):
         return PAIR
-    if is_category_full_house(point_count):
-        return FULL_HOUSE
+    if is_category_straight(point_count):
+        return STRAIGHT
     if is_category_three_of_a_kind(point_count):
         return THREE_OF_A_KIND
+    if is_category_full_house(point_count):
+        return FULL_HOUSE
     if is_category_four_of_a_kind(point_count):
         return FOUR_OF_A_KIND
     return HIGH_CARD
