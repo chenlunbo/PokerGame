@@ -2,10 +2,12 @@
 # -*- coding: UTF-8 -*-
 from collections import Counter
 
-map_dict = {"2": 2, "A": 1, "K": 13, "Q": 12, "J": 11, "10": 10, "9": 9, "8": 8, "7": 7, "6": 6, "5": 5, "4": 4, "3": 3}
+map_dict = {"2": 14, "A": 13, "K": 13, "Q": 12, "J": 11, "10": 10, "9": 9, "8": 8, "7": 7, "6": 6, "5": 5, "4": 4, "3": 3}
 
 
 def is_straight(sorted_keys):
+    if sorted_keys == ['3', '4', '5', 'A', '2']:
+        return True
     return map_dict[sorted_keys[4]] == map_dict[sorted_keys[3]] + 1 == map_dict[sorted_keys[2]] + 2 == map_dict[
         sorted_keys[1]] + 3 == map_dict[sorted_keys[0]] + 4
 
