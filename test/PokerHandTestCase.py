@@ -45,16 +45,9 @@ class TestExtraCase(unittest.TestCase):
         card = PokerCard("10S", "JD", "QC", "KS", "AC")
         self.assertEqual('Straight', card.category)
 
-        # from collections import Counter
-        # # all_card_points = {"10", "1", "10"}
-        # all_card_points = ("10", "1", "10")
-        # point_count = Counter(all_card_points)
-        # pint_count_list = list(point_count.values())
-        # point_max_value = max(pint_count_list)
-        # print(pint_count_list)
-        # print(point_count.keys())
-        # print(point_max_value)
-
+    def test_min_straight_case(self):
+        card = PokerCard("3S", "4D", "5C", "6S", "7C")
+        self.assertEqual('Straight', card.category)
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)

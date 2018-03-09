@@ -2,10 +2,20 @@
 # -*- coding: UTF-8 -*-
 from collections import Counter
 
+HIGH_CARD = 'High card'
+PAIR = 'Pair'
+THREE_OF_A_KIND = 'Three of a kind'
+STRAIGHT = 'Straight'
+FLUSH = 'Flush'
+FULL_HOUSE = 'Full House'
+FOUR_OF_A_KIND = 'Four of a kind'
+ROYAL_FLUSH = 'Royal Flush'
+
 SINGLE_CARD_POINT = 1
 PAIR_CARD_POINT = 2
 THREE_CARD_POINT = 3
 FOUR_CARD_POINT = 4
+
 MAP_DICT = {"2": 15, "A": 14, "K": 13, "Q": 12, "J": 11, "10": 10, "9": 9, "8": 8, "7": 7, "6": 6, "5": 5, "4": 4,
             "3": 3}
 
@@ -36,20 +46,20 @@ def get_category(card1, card2, card3, card4, card5):
     sorted_keys = sorted(point_count.keys(), key=lambda point: MAP_DICT[point])
     if is_all_card_in_same_suit(card1, card2, card3, card4, card5):
         if is_straight(sorted_keys):
-            return 'Royal Flush'
-        return 'Flush'
+            return ROYAL_FLUSH
+        return FLUSH
     if max_times_of_point == SINGLE_CARD_POINT:
         if is_straight(sorted_keys):
-            return 'Straight'
-        return 'High card'
+            return STRAIGHT
+        return HIGH_CARD
     if max_times_of_point == PAIR_CARD_POINT:
-        return 'Pair'
+        return PAIR
     if max_times_of_point == THREE_CARD_POINT:
         if len(list(point_count.values())) == 2:
-            return 'Full House'
-        return 'Three of a kind'
+            return FULL_HOUSE
+        return THREE_OF_A_KIND
     if max_times_of_point == FOUR_CARD_POINT:
-        return 'Four of a kind'
+        return FOUR_OF_A_KIND
 
 
 class PokerCard:
