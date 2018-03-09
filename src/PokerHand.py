@@ -2,14 +2,25 @@
 # -*- coding: UTF-8 -*-
 from collections import Counter
 
-map_dict = {"2": 15, "A": 14, "K": 13, "Q": 12, "J": 11, "10": 10, "9": 9, "8": 8, "7": 7, "6": 6, "5": 5, "4": 4, "3": 3}
+SINGLE_CARD_POINT = 1
+PAIR_CARD_POINT = 2
+THREE_CARD_POINT = 3
+FOUR_CARD_POINT = 4
+MAP_DICT = {"2": 15, "A": 14, "K": 13, "Q": 12, "J": 11, "10": 10, "9": 9, "8": 8, "7": 7, "6": 6, "5": 5, "4": 4,
+            "3": 3}
 
 
 def is_straight(sorted_keys):
     if sorted_keys == ['3', '4', '5', 'A', '2']:
         return True
-    return map_dict[sorted_keys[4]] == map_dict[sorted_keys[3]] + 1 == map_dict[sorted_keys[2]] + 2 == map_dict[
-        sorted_keys[1]] + 3 == map_dict[sorted_keys[0]] + 4
+    return MAP_DICT[sorted_keys[4]] == MAP_DICT[sorted_keys[3]] + 1 == MAP_DICT[sorted_keys[2]] + 2 == MAP_DICT[
+        sorted_keys[1]] + 3 == MAP_DICT[sorted_keys[0]] + 4
+
+
+def is_all_card_in_same_suit(card1, card2, card3, card4, card5):
+    all_card_suits = (card1[1], card2[1], card3[1], card4[1], card5[1])
+    suit_max_value = max(list(Counter(all_card_suits).values()))
+    return suit_max_value == 5
 
 
 def get_category(card1, card2, card3, card4, card5):
@@ -22,29 +33,23 @@ def get_category(card1, card2, card3, card4, card5):
     )
     point_count = Counter(all_card_points)
     max_times_of_point = max(list(point_count.values()))
-    sorted_keys = sorted(point_count.keys(), key=lambda point: map_dict[point])
+    sorted_keys = sorted(point_count.keys(), key=lambda point: MAP_DICT[point])
     if is_all_card_in_same_suit(card1, card2, card3, card4, card5):
         if is_straight(sorted_keys):
             return 'Royal Flush'
         return 'Flush'
-    if max_times_of_point == 1:
+    if max_times_of_point == SINGLE_CARD_POINT:
         if is_straight(sorted_keys):
             return 'Straight'
         return 'High card'
-    if max_times_of_point == 2:
+    if max_times_of_point == PAIR_CARD_POINT:
         return 'Pair'
-    if max_times_of_point == 3:
+    if max_times_of_point == THREE_CARD_POINT:
         if len(list(point_count.values())) == 2:
             return 'Full House'
         return 'Three of a kind'
-    if max_times_of_point == 4:
+    if max_times_of_point == FOUR_CARD_POINT:
         return 'Four of a kind'
-
-
-def is_all_card_in_same_suit(card1, card2, card3, card4, card5):
-    all_card_suits = (card1[1], card2[1], card3[1], card4[1], card5[1])
-    suit_max_value = max(list(Counter(all_card_suits).values()))
-    return suit_max_value == 5
 
 
 class PokerCard:
