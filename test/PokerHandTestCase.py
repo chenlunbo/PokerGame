@@ -53,5 +53,17 @@ class TestExtraCase(unittest.TestCase):
         card = PokerCard("3S", "4D", "3C", "4S", "7C")
         self.assertEqual('Pair', card.category)
 
+    def test_not_straight_case_1(self):
+        card = PokerCard("JS", "QS", "KC", "AS", "2C")
+        self.assertEqual('High card', card.category)
+
+    def test_not_straight_case_2(self):
+        card = PokerCard("QS", "KC", "AS", "2C", "3C")
+        self.assertEqual('High card', card.category)
+
+    def test_not_straight_case_3(self):
+        card = PokerCard("KC", "AS", "2C", "3C", "4S")
+        self.assertEqual('High card', card.category)
+
 if __name__ == '__main__':
     unittest.main(verbosity=2)

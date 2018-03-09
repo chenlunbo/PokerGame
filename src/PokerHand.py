@@ -23,6 +23,8 @@ def is_straight(point_count):
     sorted_keys = sorted(point_count.keys(), key=lambda point: MAP_DICT[point])
     if sorted_keys == ['3', '4', '5', 'A', '2']:
         return True
+    if sorted_keys == ['J', 'Q', 'K', 'A', '2']:
+        return False
     return MAP_DICT[sorted_keys[4]] == MAP_DICT[sorted_keys[3]] + 1 == MAP_DICT[sorted_keys[2]] + 2 == MAP_DICT[
         sorted_keys[1]] + 3 == MAP_DICT[sorted_keys[0]] + 4
 
